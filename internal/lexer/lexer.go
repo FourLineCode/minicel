@@ -6,7 +6,7 @@ import (
 	"github.com/FourLineCode/minicel/internal/table"
 )
 
-func Parse(content string) table.Table {
+func Parse(content string) table.TokenizedTable {
 	lines := strings.Split(content, "\n")
 
 	slice := parseRows(lines)

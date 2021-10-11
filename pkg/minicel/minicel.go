@@ -4,6 +4,7 @@ import (
 	"io/ioutil"
 
 	"github.com/FourLineCode/minicel/internal/lexer"
+	"github.com/FourLineCode/minicel/internal/parser"
 )
 
 func ParseCSV(path string) error {
@@ -12,11 +13,13 @@ func ParseCSV(path string) error {
 		return err
 	}
 
-	t := lexer.Parse(string(content))
+	tokenizedTable := lexer.Parse(string(content))
 
-	t.PrintSize()
-	t.PrintSlice()
-	t.PrintTokens()
+	tokenizedTable.PrintSize()
+	tokenizedTable.PrintSlice()
+	tokenizedTable.PrintTokens()
+
+	parser.Parse(tokenizedTable)
 
 	return nil
 }

@@ -8,12 +8,6 @@ import (
 	"github.com/FourLineCode/minicel/internal/utils"
 )
 
-const (
-	TOKEN_TEXT = iota
-	TOKEN_NUMBER
-	TOKEN_EXPR
-)
-
 func tokenizeTable(slice table.TableSlice) table.TableFields {
 	fields := make(table.TableFields)
 
@@ -25,13 +19,13 @@ func tokenizeTable(slice table.TableSlice) table.TableFields {
 
 			tokenizedCell := table.TokenizedCell{}
 			if strings.HasPrefix(col, "=") {
-				tokenizedCell.Type = TOKEN_EXPR
+				tokenizedCell.Type = table.TOKEN_EXPR
 				tokenizedCell.Value = strings.TrimLeft(col, "=")
 			} else if isNumeric(col) {
-				tokenizedCell.Type = TOKEN_NUMBER
+				tokenizedCell.Type = table.TOKEN_NUMBER
 				tokenizedCell.Value = col
 			} else {
-				tokenizedCell.Type = TOKEN_TEXT
+				tokenizedCell.Type = table.TOKEN_TEXT
 				tokenizedCell.Value = col
 			}
 

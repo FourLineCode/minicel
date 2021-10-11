@@ -4,13 +4,13 @@ INPUT = csv/$(FILE).csv
 OS = linux
 
 all:
-	go run cmd/main.go $(INPUT)
+	go run cmd/main.go $(INPUT) $(ARGS)
 
 build:
 	GOOS=$(OS) go build -o $(BIN) cmd/main.go
 
 run:
-	./$(BIN) $(INPUT)
+	./$(BIN) $(INPUT) $(ARGS)
 
 test: build run
 

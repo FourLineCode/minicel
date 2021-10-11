@@ -1,6 +1,5 @@
 package table
 
-type Token int
 type CellName string
 type TableSlice [][]string
 type TableFields map[CellName]TableCell
@@ -25,14 +24,14 @@ type TableSize struct {
 	Cols int
 }
 
-type Table struct {
+type TokenizedTable struct {
 	Size   TableSize
 	Slice  TableSlice
 	Fields TableFields
 }
 
-func New(size TableSize, slice TableSlice, fields TableFields) Table {
-	return Table{
+func New(size TableSize, slice TableSlice, fields TableFields) TokenizedTable {
+	return TokenizedTable{
 		Size:   size,
 		Slice:  slice,
 		Fields: fields,

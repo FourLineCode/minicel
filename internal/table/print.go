@@ -8,11 +8,11 @@ import (
 	"github.com/FourLineCode/minicel/internal/utils"
 )
 
-func (t Table) PrintSize() {
+func (t TokenizedTable) PrintSize() {
 	fmt.Printf("Table Size: %vx%v\n", t.Size.Rows, t.Size.Cols)
 }
 
-func (t Table) PrintSlice() {
+func (t TokenizedTable) PrintSlice() {
 	columnLengths := make([]int, t.Size.Cols)
 	sum := 0
 	minSpaces := 3
@@ -26,6 +26,7 @@ func (t Table) PrintSlice() {
 	extraLength := int(math.Floor(math.Sqrt(float64(len(colSeparator)))))
 	tableLength := sum + t.Size.Cols*len(colSeparator) - extraLength
 
+	fmt.Println("Table Slice:")
 	printSeparators(tableLength)
 
 	for _, row := range t.Slice {
@@ -49,7 +50,7 @@ func (t Table) PrintSlice() {
 	printSeparators(tableLength)
 }
 
-func (t Table) PrintTokens() {
+func (t TokenizedTable) PrintTokens() {
 	tokenToTypename := map[int]string{
 		0: "TEXT",
 		1: "NUMBER",
@@ -73,6 +74,7 @@ func (t Table) PrintTokens() {
 	extraLength := int(math.Floor(math.Sqrt(float64(len(colSeparator)))))
 	tableLength := sum + t.Size.Cols*len(colSeparator) - extraLength
 
+	fmt.Println("Table Tokens:")
 	printSeparators(tableLength)
 
 	for rowIndex, row := range t.Slice {
@@ -99,7 +101,7 @@ func (t Table) PrintTokens() {
 	printSeparators(tableLength)
 }
 
-func (t Table) maxColumnLength(index int) int {
+func (t TokenizedTable) maxColumnLength(index int) int {
 	if index < 0 || index >= t.Size.Cols {
 		fmt.Println("Error: column index out of bound", index)
 		os.Exit(1)
