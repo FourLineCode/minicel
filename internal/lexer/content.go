@@ -20,7 +20,7 @@ func parseRows(lines []string) table.TableSlice {
 		values := strings.Split(line, delim)
 
 		for _, val := range values {
-			cell := strings.Trim(val, " ")
+			cell := strings.TrimSpace(val)
 			if cell != "" {
 				row = append(row, cell)
 			}
