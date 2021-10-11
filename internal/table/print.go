@@ -13,30 +13,33 @@ func (t Table) PrintSize() {
 func (t Table) PrintSlice() {
 	columnLengths := make([]int, t.Size.Cols)
 	sum := 0
+	minSpaces := 3
+	colSeparator := " | "
 
 	for i := 0; i < t.Size.Cols; i++ {
 		columnLengths[i] = t.maxColumnLength(i)
-		sum += columnLengths[i]
+		sum += int(math.Max(float64(minSpaces), float64(columnLengths[i])))
 	}
 
-	tableLength := sum + t.Size.Cols*3 - 1
+	extraLength := int(math.Floor(math.Sqrt(float64(len(colSeparator)))))
+	tableLength := sum + t.Size.Cols*len(colSeparator) - extraLength
 
 	printSeparators(tableLength)
 
 	for _, row := range t.Slice {
 		for i := 0; i < t.Size.Cols; i++ {
 			length := columnLengths[i]
-			spaces := length
+			spaces := int(math.Max(float64(minSpaces), float64(length)))
 
 			if i < len(row) {
 				cell := row[i]
 				fmt.Printf("%v", cell)
-				spaces = length - len(cell)
+				spaces -= len(cell)
 			}
 			for i := 0; i < spaces; i++ {
 				fmt.Printf(" ")
 			}
-			fmt.Printf(" | ")
+			fmt.Printf("%v", colSeparator)
 		}
 		fmt.Println()
 	}
