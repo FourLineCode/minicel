@@ -4,3 +4,8 @@
             -   [ ] tables have A-Z columns, after if repeats (AA, AAA...)
             -   [ ] numbers as rows (1, 2, 3 ... Infinity)
     -   [ ] option to print output in csv file
+    -   [ ] add flags
+        -   [ ] print table
+            -   [ ] parsed
+            -   [ ] unparsed
+        -   [ ] print size

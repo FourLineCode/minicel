@@ -1,7 +1,9 @@
 package lexer
 
 import (
+	"fmt"
 	"math"
+	"os"
 	"strings"
 
 	"github.com/FourLineCode/minicel/internal/table"
@@ -10,7 +12,13 @@ import (
 func parseRows(lines []string) table.TableSlice {
 	table := table.TableSlice{}
 
-	for _, line := range lines {
+	for index, line := range lines {
+		if strings.Contains(line, ";") && strings.Contains(line, ",") {
+			fmt.Println("Error: invalid syntaxt for .csv file at line", index)
+			fmt.Println("\t.csv files cannot contain both comma (,) and semicolon (;)")
+			os.Exit(1)
+		}
+
 		delim := ","
 		if !strings.Contains(line, ",") && strings.Contains(line, ";") {
 			delim = ";"
