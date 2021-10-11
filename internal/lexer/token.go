@@ -1,0 +1,9 @@
+package lexer
+
+const (
+	TOKEN_TEXT = iota
+	TOKEN_NUMBER
+	TOKEN_EXPR
+	TOKEN_TYPE
+	TOKEN_COUNT
+)

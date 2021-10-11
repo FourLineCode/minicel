@@ -1,0 +1,6 @@
+-   TODO's
+    -   [ ] make parser
+        -   [ ] return table type
+            -   [ ] tables have A-Z columns, after if repeats (AA, AAA...)
+            -   [ ] numbers as rows (1, 2, 3 ... Infinity)
+    -   [ ] option to print output in csv file
