@@ -10,11 +10,13 @@ const (
 	EXPR_SUBTRACT
 	EXPR_MULTIPLY
 	EXPR_DIVIDE
+	EXPR_NONE
 )
 
 type Expression struct {
 	Type     Expr
-	Original string
+	Operator string
+	Original table.TokenizedCell
 }
 
 type ParsedCell struct {

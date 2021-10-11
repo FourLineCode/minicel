@@ -1,8 +1,11 @@
 -   TODO's
+    -   [x] make lexer
+        -   [x] return table type
+            -   [x] tables have A-Z columns, after if repeats (AA, AAA...)
+            -   [x] numbers as rows (1, 2, 3 ... Infinity)
     -   [ ] make parser
-        -   [ ] return table type
-            -   [ ] tables have A-Z columns, after if repeats (AA, AAA...)
-            -   [ ] numbers as rows (1, 2, 3 ... Infinity)
+        -   [ ] parse expressions (A1+B1)
+        -   [ ] eval numeric expressions (=2\*2)
     -   [ ] option to print output in csv file
     -   [ ] add flags
         -   [ ] print table
