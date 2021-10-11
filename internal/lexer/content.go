@@ -11,8 +11,13 @@ func parseRows(lines []string) table.TableSlice {
 	table := table.TableSlice{}
 
 	for _, line := range lines {
+		delim := ","
+		if !strings.Contains(line, ",") && strings.Contains(line, ";") {
+			delim = ";"
+		}
+
 		row := []string{}
-		values := strings.Split(line, ",")
+		values := strings.Split(line, delim)
 
 		for _, val := range values {
 			cell := strings.Trim(val, " ")
