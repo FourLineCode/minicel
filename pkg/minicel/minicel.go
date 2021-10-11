@@ -16,6 +16,7 @@ func ParseCSV(path string) error {
 
 	t.PrintSize()
 	t.PrintSlice()
+	t.PrintTokens()
 
 	return nil
 }

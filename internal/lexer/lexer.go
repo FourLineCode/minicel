@@ -11,8 +11,9 @@ func Parse(content string) table.Table {
 
 	slice := parseRows(lines)
 	size := estimateTableSize(slice)
+	fields := tokenizeTable(slice)
 
-	t := table.New(size, slice, make(table.TableFields))
+	t := table.New(size, slice, fields)
 
 	return t
 }

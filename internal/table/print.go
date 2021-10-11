@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"math"
 	"os"
+
+	"github.com/FourLineCode/minicel/internal/utils"
 )
 
 func (t Table) PrintSize() {
@@ -35,6 +37,56 @@ func (t Table) PrintSlice() {
 				cell := row[i]
 				fmt.Printf("%v", cell)
 				spaces -= len(cell)
+			}
+			for i := 0; i < spaces; i++ {
+				fmt.Printf(" ")
+			}
+			fmt.Printf("%v", colSeparator)
+		}
+		fmt.Println()
+	}
+
+	printSeparators(tableLength)
+}
+
+func (t Table) PrintTokens() {
+	tokenToTypename := map[int]string{
+		0: "TEXT",
+		1: "NUMBER",
+		2: "EXPR",
+	}
+
+	columnLengths := make([]int, t.Size.Cols)
+	sum := 0
+	minSpaces := 0
+	colSeparator := " | "
+
+	for _, v := range tokenToTypename {
+		minSpaces = int(math.Max(float64(minSpaces), float64(len(v))))
+	}
+
+	for i := 0; i < t.Size.Cols; i++ {
+		columnLengths[i] = t.maxColumnLength(i)
+		sum += int(math.Max(float64(minSpaces), float64(columnLengths[i])))
+	}
+
+	extraLength := int(math.Floor(math.Sqrt(float64(len(colSeparator)))))
+	tableLength := sum + t.Size.Cols*len(colSeparator) - extraLength
+
+	printSeparators(tableLength)
+
+	for rowIndex, row := range t.Slice {
+		for i := 0; i < t.Size.Cols; i++ {
+			length := columnLengths[i]
+			spaces := int(math.Max(float64(minSpaces), float64(length)))
+
+			cellName := utils.GetCellnameFromIndex(rowIndex, i)
+			cell := t.Fields[CellName(cellName)]
+
+			cellType := tokenToTypename[int(cell.Field.Type)]
+			if i < len(row) {
+				fmt.Printf("%v", cellType)
+				spaces -= len(cellType)
 			}
 			for i := 0; i < spaces; i++ {
 				fmt.Printf(" ")
