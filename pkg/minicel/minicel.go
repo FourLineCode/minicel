@@ -17,9 +17,10 @@ func ParseCSV(path string) error {
 
 	tokenizedTable.PrintSize()
 	tokenizedTable.PrintSlice()
-	tokenizedTable.PrintTokens()
+	// tokenizedTable.PrintTokens()
 
-	parser.Parse(tokenizedTable)
+	parsedTable := parser.Parse(tokenizedTable)
+	parsedTable.PrintTable()
 
 	return nil
 }

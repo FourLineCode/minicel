@@ -45,13 +45,14 @@ func Parse(tokenizedTable table.TokenizedTable) ParsedTable {
 			os.Exit(1)
 		}
 
-		parsedValue, err := parseExpressionValue(expression, parsedTable)
+		parsedValue, err := parseExpressionValue(expression, &parsedTable)
 		if err != nil {
 			fmt.Println("Error: expression has invalid operation on field", key)
 			validExpressions()
 			os.Exit(1)
 		}
 
+		expression.Type = table.TOKEN_NUMBER
 		parsedFieldCell.Field = ParsedCell{Expression: expression, ParsedValue: parsedValue}
 
 		parsedTable.ParsedFields[key] = parsedFieldCell
@@ -96,7 +97,7 @@ func isValidExpression(val string) bool {
 	return plus || minus || mul || div
 }
 
-func parseExpressionValue(exp Expression, t ParsedTable) (string, error) {
+func parseExpressionValue(exp Expression, t *ParsedTable) (string, error) {
 	cells := strings.Split(exp.Original.Value, exp.Operator)
 	cell1Name, cell2Name := cells[0], cells[1]
 
@@ -141,7 +142,10 @@ func parseExpressionValue(exp Expression, t ParsedTable) (string, error) {
 		os.Exit(1)
 	}
 
+	if num-float64(int(num)) == 0 {
+		return strconv.Itoa(int(num)), nil
+	}
 	value := fmt.Sprintf("%f", num)
-	fmt.Println(value)
-	return value, nil
+
+	return strings.TrimRight(strings.TrimRight(value, "0"), "."), nil
 }
